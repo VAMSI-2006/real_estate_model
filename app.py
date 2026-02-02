@@ -76,17 +76,22 @@ if 'current_prediction' not in st.session_state:
 # -----------------------------
 # Load Trained Models
 # -----------------------------
-try:
-    models = {
-        "Linear Regression": joblib.load("models/linear_regression_pipeline.joblib"),
-        "Decision Tree": joblib.load("models/decision_tree_pipeline.joblib"),
-        "Random Forest": joblib.load("models/random_forest_pipeline.joblib"),
-    }
-except FileNotFoundError:
-    st.error("❌ Model files not found. Please ensure the 'models' directory exists with the required model files.")
-    st.stop()
-except Exception as e:
-    st.error(f"❌ Error loading models: {e}")
+models = {}
+model_files = {
+    "Linear Regression": "models/linear_regression_pipeline.joblib",
+    "Decision Tree": "models/decision_tree_pipeline.joblib",
+    "Random Forest": "models/random_forest_pipeline.joblib",
+}
+
+for name, path in model_files.items():
+    if os.path.exists(path):
+        try:
+            models[name] = joblib.load(path)
+        except Exception as e:
+            st.warning(f"⚠️ Could not load {name}: {e}")
+
+if not models:
+    st.error("❌ No model files found. Please upload at least one model to the 'models' directory.")
     st.stop()
 
 # -----------------------------
