@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDES
+.vscode/
+.idea/
+
+# Local data (optional, but good practice if data is large)
+# bengaluru_house_prices.csv 
+# (Keeping the CSV for now since it's likely a small project dataset, 
+#  but usually data isn't committed if it's huge)
+
+# OS
+.DS_Store
+Thumbs.db
